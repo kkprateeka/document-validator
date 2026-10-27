@@ -1,0 +1,445 @@
+
+RULE: native file - refer to free attribute 4 or vmdl column ab, to ensure if the native file is required, if yes, open it just be sure native file is working
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: crs company - it will be required for the document with cpy class 1 & 2 starting from rev01; crs to be verified before sent to cpy, crs template cannot be modified, and fully completed; if any cpy class 3 document is commented by cpy, same logic
+OUTPUT: {'type': 'file_size', 'field': 'crs company', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: bookmarks - document having more than 50 pages should have bookmarks in the pdf.
+OUTPUT: {'type': 'searchable', 'field': 'bookmarks', 'operator': '>=', 'value': 50, 'excel_column': ''}
+--------------------------------------------------
+RULE: comment - no comments allowed on the pdf file or comments must be flattened
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: attachment - no attachment allowed on the pdf file
+OUTPUT: {'type': 'attachment', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: layers - no layers allowed on the pdf file
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: trackchanges - revision history section must be filled when rev is higher than 00.
+OUTPUT: {'type': 'text_presence', 'field': 'trackchanges', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: logo - project logo must be the present on the header.
+OUTPUT: {'type': 'logo', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: signatures - shall be duly signed. signatures electronic (not protected) and scanned signatures will be allowed
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: footer - footer on the first and second page must be: “the document is the property of company. it must not be stored, reproduced or disclosed to others without written authorization from the company”
+OUTPUT: {'type': 'text_presence', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: language - english, if the language of origin is not english, then the translation must be applied
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '=', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: tagging - must be mentioned on the second page in “list of tags” section
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: as fabricated (asf) - asf status can only be issued if previous revision was ifc code 1 – approved without comment
+OUTPUT: {'type': 'file_size', 'field': 'asf status', 'operator': '', 'value': 'can only be issued if previous revision was ifc code 1 – approved without comment', 'excel_column': ''}
+--------------------------------------------------
+RULE: status - to be logic class 1 (ifr, ifa, ifc), class 2 (ifr, ifc), class 3 (ifi, ifi)
+OUTPUT: {'type': 'file_size | filename | date_format', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: revision - revision in scanned document shall not be in history of vmdl.
+OUTPUT: {'type': 'text_presence', 'field': 'revision', 'operator': '', 'value': 'shall not be in history of vmdl.', 'excel_column': ''}
+--------------------------------------------------
+RULE: status description - should return by looking up the value corresponding to the code (line 37)
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: result review code - last available ctr review code is available in vmdl and will be used to define item 12.
+OUTPUT: {'type': 'vmdl', 'field': 'last available ctr review code', 'operator': '', 'value': 'is available in', 'excel_column': ''}
+--------------------------------------------------
+RULE: « status » in footer - as per vmdl, all status data linked to the revisions shall be found in vmdl table (except the current document revision).
+OUTPUT: {'type': 'vmdl', 'field': 'status', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: « revision memo » in footer - “revision memo” shall correspond to the “status” defined in criteria 42.
+OUTPUT: {'type': 'revision memo', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: native file - refer to free attribute 4 or vmdl column ab, to ensure if the native file is required, if yes, open it just be sure native file is working
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: crs company - it will be required for the document with cpy class 1 & 2 starting from rev01; crs to be verified before sent to cpy, crs template cannot be modified, and fully completed; if any cpy class 3 document is commented by cpy, same logic
+OUTPUT: {'type': 'file_size', 'field': 'crs company', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: bookmarks - document having more than 50 pages should have bookmarks in the pdf.
+OUTPUT: {'type': 'searchable', 'field': 'bookmarks', 'operator': '>=', 'value': 50, 'excel_column': ''}
+--------------------------------------------------
+RULE: comment - no comments allowed on the pdf file or comments must be flattened
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: attachment - no attachment allowed on the pdf file
+OUTPUT: {'type': 'attachment', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: layers - no layers allowed on the pdf file
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: trackchanges - revision history section must be filled when rev is higher than 00.
+OUTPUT: {'type': 'text_presence', 'field': 'trackchanges', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: logo - project logo must be the present on the header.
+OUTPUT: {'type': 'logo', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: signatures - shall be duly signed. signatures electronic (not protected) and scanned signatures will be allowed
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: footer - footer on the first and second page must be: “the document is the property of company. it must not be stored, reproduced or disclosed to others without written authorization from the company”
+OUTPUT: {'type': 'text_presence', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: language - english, if the language of origin is not english, then the translation must be applied
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '=', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: tagging - must be mentioned on the second page in “list of tags” section
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: as fabricated (asf) - asf status can only be issued if previous revision was ifc code 1 – approved without comment
+OUTPUT: {'type': 'file_size', 'field': 'asf status', 'operator': '', 'value': 'can only be issued if previous revision was ifc code 1 – approved without comment', 'excel_column': ''}
+--------------------------------------------------
+RULE: status - to be logic class 1 (ifr, ifa, ifc), class 2 (ifr, ifc), class 3 (ifi, ifi)
+OUTPUT: {'type': 'file_size | filename | date_format', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: revision - revision in scanned document shall not be in history of vmdl.
+OUTPUT: {'type': 'text_presence', 'field': 'revision', 'operator': '', 'value': 'shall not be in history of vmdl.', 'excel_column': ''}
+--------------------------------------------------
+RULE: status description - should return by looking up the value corresponding to the code (line 37)
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: result review code - last available ctr review code is available in vmdl and will be used to define item 12.
+OUTPUT: {'type': 'vmdl', 'field': 'last available ctr review code', 'operator': '', 'value': 'is available in', 'excel_column': ''}
+--------------------------------------------------
+RULE: « status » in footer - as per vmdl, all status data linked to the revisions shall be found in vmdl table (except the current document revision).
+OUTPUT: {'type': 'vmdl', 'field': 'status', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: « revision memo » in footer - “revision memo” shall correspond to the “status” defined in criteria 42.
+OUTPUT: {'type': 'revision memo', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: native file - refer to free attribute 4 or vmdl column ab, to ensure if the native file is required, if yes, open it just be sure native file is working
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: crs company - it will be required for the document with cpy class 1 & 2 starting from rev01; crs to be verified before sent to cpy, crs template cannot be modified, and fully completed; if any cpy class 3 document is commented by cpy, same logic
+OUTPUT: {'type': 'file_size', 'field': 'crs company', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: bookmarks - document having more than 50 pages should have bookmarks in the pdf.
+OUTPUT: {'type': 'searchable', 'field': 'bookmarks', 'operator': '>=', 'value': 50, 'excel_column': ''}
+--------------------------------------------------
+RULE: comment - no comments allowed on the pdf file or comments must be flattened
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: attachment - no attachment allowed on the pdf file
+OUTPUT: {'type': 'attachment', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: layers - no layers allowed on the pdf file
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: trackchanges - revision history section must be filled when rev is higher than 00.
+OUTPUT: {'type': 'text_presence', 'field': 'trackchanges', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: logo - project logo must be the present on the header.
+OUTPUT: {'type': 'logo', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: signatures - shall be duly signed. signatures electronic (not protected) and scanned signatures will be allowed
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: footer - footer on the first and second page must be: “the document is the property of company. it must not be stored, reproduced or disclosed to others without written authorization from the company”
+OUTPUT: {'type': 'text_presence', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: language - english, if the language of origin is not english, then the translation must be applied
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '=', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: tagging - must be mentioned on the second page in “list of tags” section
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: as fabricated (asf) - asf status can only be issued if previous revision was ifc code 1 – approved without comment
+OUTPUT: {'type': 'file_size', 'field': 'asf status', 'operator': '', 'value': 'can only be issued if previous revision was ifc code 1 – approved without comment', 'excel_column': ''}
+--------------------------------------------------
+RULE: status - to be logic class 1 (ifr, ifa, ifc), class 2 (ifr, ifc), class 3 (ifi, ifi)
+OUTPUT: {'type': 'file_size | filename | date_format', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: revision - revision in scanned document shall not be in history of vmdl.
+OUTPUT: {'type': 'text_presence', 'field': 'revision', 'operator': '', 'value': 'shall not be in history of vmdl.', 'excel_column': ''}
+--------------------------------------------------
+RULE: status description - should return by looking up the value corresponding to the code (line 37)
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: result review code - last available ctr review code is available in vmdl and will be used to define item 12.
+OUTPUT: {'type': 'vmdl', 'field': 'last available ctr review code', 'operator': '', 'value': 'is available in', 'excel_column': ''}
+--------------------------------------------------
+RULE: « status » in footer - as per vmdl, all status data linked to the revisions shall be found in vmdl table (except the current document revision).
+OUTPUT: {'type': 'vmdl', 'field': 'status', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: « revision memo » in footer - “revision memo” shall correspond to the “status” defined in criteria 42.
+OUTPUT: {'type': 'revision memo', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: native file - refer to free attribute 4 or vmdl column ab, to ensure if the native file is required, if yes, open it just be sure native file is working
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: crs company - it will be required for the document with cpy class 1 & 2 starting from rev01; crs to be verified before sent to cpy, crs template cannot be modified, and fully completed; if any cpy class 3 document is commented by cpy, same logic
+OUTPUT: {'type': 'file_size', 'field': 'crs company', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: bookmarks - document having more than 50 pages should have bookmarks in the pdf.
+OUTPUT: {'type': 'searchable', 'field': 'bookmarks', 'operator': '>=', 'value': 50, 'excel_column': ''}
+--------------------------------------------------
+RULE: comment - no comments allowed on the pdf file or comments must be flattened
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: attachment - no attachment allowed on the pdf file
+OUTPUT: {'type': 'attachment', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: layers - no layers allowed on the pdf file
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: trackchanges - revision history section must be filled when rev is higher than 00.
+OUTPUT: {'type': 'text_presence', 'field': 'trackchanges', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: logo - project logo must be the present on the header.
+OUTPUT: {'type': 'logo', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: signatures - shall be duly signed. signatures electronic (not protected) and scanned signatures will be allowed
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: footer - footer on the first and second page must be: “the document is the property of company. it must not be stored, reproduced or disclosed to others without written authorization from the company”
+OUTPUT: {'type': 'text_presence', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: language - english, if the language of origin is not english, then the translation must be applied
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '=', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: tagging - must be mentioned on the second page in “list of tags” section
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: as fabricated (asf) - asf status can only be issued if previous revision was ifc code 1 – approved without comment
+OUTPUT: {'type': 'file_size', 'field': 'asf status', 'operator': '', 'value': 'can only be issued if previous revision was ifc code 1 – approved without comment', 'excel_column': ''}
+--------------------------------------------------
+RULE: status - to be logic class 1 (ifr, ifa, ifc), class 2 (ifr, ifc), class 3 (ifi, ifi)
+OUTPUT: {'type': 'file_size | filename | date_format', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: revision - revision in scanned document shall not be in history of vmdl.
+OUTPUT: {'type': 'text_presence', 'field': 'revision', 'operator': '', 'value': 'shall not be in history of vmdl.', 'excel_column': ''}
+--------------------------------------------------
+RULE: status description - should return by looking up the value corresponding to the code (line 37)
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: result review code - last available ctr review code is available in vmdl and will be used to define item 12.
+OUTPUT: {'type': 'vmdl', 'field': 'last available ctr review code', 'operator': '', 'value': 'is available in', 'excel_column': ''}
+--------------------------------------------------
+RULE: « status » in footer - as per vmdl, all status data linked to the revisions shall be found in vmdl table (except the current document revision).
+OUTPUT: {'type': 'vmdl', 'field': 'status', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: « revision memo » in footer - “revision memo” shall correspond to the “status” defined in criteria 42.
+OUTPUT: {'type': 'revision memo', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: native file - refer to free attribute 4 or vmdl column ab, to ensure if the native file is required, if yes, open it just be sure native file is working
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: crs company - it will be required for the document with cpy class 1 & 2 starting from rev01; crs to be verified before sent to cpy, crs template cannot be modified, and fully completed; if any cpy class 3 document is commented by cpy, same logic
+OUTPUT: {'type': 'file_size', 'field': 'crs company', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: bookmarks - document having more than 50 pages should have bookmarks in the pdf.
+OUTPUT: {'type': 'searchable', 'field': 'bookmarks', 'operator': '>=', 'value': 50, 'excel_column': ''}
+--------------------------------------------------
+RULE: comment - no comments allowed on the pdf file or comments must be flattened
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: attachment - no attachment allowed on the pdf file
+OUTPUT: {'type': 'attachment', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: layers - no layers allowed on the pdf file
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: trackchanges - revision history section must be filled when rev is higher than 00.
+OUTPUT: {'type': 'text_presence', 'field': 'trackchanges', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: logo - project logo must be the present on the header.
+OUTPUT: {'type': 'logo', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: signatures - shall be duly signed. signatures electronic (not protected) and scanned signatures will be allowed
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: footer - footer on the first and second page must be: “the document is the property of company. it must not be stored, reproduced or disclosed to others without written authorization from the company”
+OUTPUT: {'type': 'text_presence', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: tagging - must be mentioned on the second page in “list of tags” section
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: as fabricated (asf) - asf status can only be issued if previous revision was ifc code 1 – approved without comment
+OUTPUT: {'type': 'file_size', 'field': 'asf status', 'operator': '', 'value': 'can only be issued if previous revision was ifc code 1 – approved without comment', 'excel_column': ''}
+--------------------------------------------------
+RULE: status - to be logic class 1 (ifr, ifa, ifc), class 2 (ifr, ifc), class 3 (ifi, ifi)
+OUTPUT: {'type': 'file_size | filename | date_format', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: revision - revision in scanned document shall not be in history of vmdl.
+OUTPUT: {'type': 'text_presence', 'field': 'revision', 'operator': '', 'value': 'shall not be in history of vmdl.', 'excel_column': ''}
+--------------------------------------------------
+RULE: status description - should return by looking up the value corresponding to the code (line 37)
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: result review code - last available ctr review code is available in vmdl and will be used to define item 12.
+OUTPUT: {'type': 'vmdl', 'field': 'last available ctr review code', 'operator': '', 'value': 'is available in', 'excel_column': ''}
+--------------------------------------------------
+RULE: « status » in footer - as per vmdl, all status data linked to the revisions shall be found in vmdl table (except the current document revision).
+OUTPUT: {'type': 'vmdl', 'field': 'status', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: « revision memo » in footer - “revision memo” shall correspond to the “status” defined in criteria 42.
+OUTPUT: {'type': 'revision memo', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: PROJECT TEMPLATE - Must be used and cannot be modified, header and footer shall be applied for the rest of the document including Appendix, Annex and attachment: First pages are mandatory (for Word and Excel) and must be properly completed
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: bookmarks - document having more than 50 pages should have bookmarks in the pdf.
+OUTPUT: {'type': 'searchable', 'field': 'bookmarks', 'operator': '>=', 'value': 50, 'excel_column': ''}
+--------------------------------------------------
+RULE: logo - project logo must be the present on the header.
+OUTPUT: {'type': 'logo', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: language - english, if the language of origin is not english, then the translation must be applied
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '=', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: Vendor Name - Should be in line with Column B of the EXCEL.
+OUTPUT: {'type': 'filename', 'field': '', 'operator': '', 'value': '', 'excel_column': 'B'}
+--------------------------------------------------
+RULE: PO Nr - Should be in line with Column A of the EXCEL.
+OUTPUT: {'type': 'vmdl', 'field': 'PO Nr', 'operator': '', 'value': '', 'excel_column': 'A'}
+--------------------------------------------------
+RULE: PO Title - Should be in line with Column C of the EXCEL.
+OUTPUT: {'type': 'PO Title', 'field': '', 'operator': '', 'value': '', 'excel_column': 'Column C'}
+--------------------------------------------------
+RULE: Document Title - Should be in line with Column E of the EXCEL.
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '', 'value': '', 'excel_column': 'E'}
+--------------------------------------------------
+RULE: Class - Should be in line with Column of the EXCEL (where header = “Kaminho Doc Class”)
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: Discipline - Should be in line with Column J of the EXCEL (where header = “Discipline”)
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: Contractor Doc Num - If available, Should be in line with Column L of the EXCEL Where header = “Contractor (CTR) Document Nr”
+OUTPUT: {'type': 'file_size', 'field': 'Contractor Doc Num', 'operator': '', 'value': '', 'excel_column': 'L'}
+--------------------------------------------------
+RULE: System/Subsystem - Should be in line with Column “System / Subsystem” of the EXCEL
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: Document Type - Should be in line with Column I of the EXCEL (where header = “Doc. Type”)
+OUTPUT: {'type': 'file_size | filename', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: PROJECT TEMPLATE - Must be used and cannot be modified, header and footer shall be applied for the rest of the document including Appendix, Annex and attachment: First pages are mandatory (for Word and Excel) and must be properly completed
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: bookmarks - document having more than 50 pages should have bookmarks in the pdf.
+OUTPUT: {'type': 'searchable', 'field': 'bookmarks', 'operator': '>=', 'value': 50, 'excel_column': ''}
+--------------------------------------------------
+RULE: logo - project logo must be the present on the header.
+OUTPUT: {'type': 'logo', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: language - english, if the language of origin is not english, then the translation must be applied
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '=', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: Vendor Name - Should be in line with Column B of the EXCEL.
+OUTPUT: {'type': 'filename', 'field': '', 'operator': '', 'value': '', 'excel_column': 'B'}
+--------------------------------------------------
+RULE: PO Nr - Should be in line with Column A of the EXCEL.
+OUTPUT: {'type': 'vmdl', 'field': 'PO Nr', 'operator': '', 'value': '', 'excel_column': 'A'}
+--------------------------------------------------
+RULE: PO Title - Should be in line with Column C of the EXCEL.
+OUTPUT: {'type': 'PO Title', 'field': '', 'operator': '', 'value': '', 'excel_column': 'Column C'}
+--------------------------------------------------
+RULE: Document Title - Should be in line with Column E of the EXCEL.
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '', 'value': '', 'excel_column': 'E'}
+--------------------------------------------------
+RULE: Class - Should be in line with Column of the EXCEL (where header = “Kaminho Doc Class”)
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: Discipline - Should be in line with Column J of the EXCEL (where header = “Discipline”)
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: Contractor Doc Num - If available, Should be in line with Column L of the EXCEL Where header = “Contractor (CTR) Document Nr”
+OUTPUT: {'type': 'file_size', 'field': 'Contractor Doc Num', 'operator': '', 'value': '', 'excel_column': 'L'}
+--------------------------------------------------
+RULE: System/Subsystem - Should be in line with Column “System / Subsystem” of the EXCEL
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: Document Type - Should be in line with Column I of the EXCEL (where header = “Doc. Type”)
+OUTPUT: {'type': 'file_size | filename', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: Status - Should be consistent with calculation summarized in the chart below where: Class is the current class on the Header of the PDF document, “Previous rev was” can be found in the Excel “VMDL” “Previous review code” can be found in the Excel “VMDL”. These 3 criteria will allow to read the next expected status that should be read in the Header of current PDF to be scanned. For example: if the scanned document has the class 2/3, if the previous rev was “IFR” If the previous CTR review code was “3 - Rejected”, then the expected status on current doc should be “IFR”
+OUTPUT: {'type': 'vmdl', 'field': 'Status', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: First status - If the revision in the document is 00, status should correspond the look-up based on the class: In VMDL file (excel file) 00 is replaced by “xx”
+OUTPUT: {'type': 'vmdl', 'field': 'revision', 'operator': '', 'value': 'xx', 'excel_column': ''}
+--------------------------------------------------
+RULE: PROJECT TEMPLATE - Must be used and cannot be modified, header and footer shall be applied for the rest of the document including Appendix, Annex and attachment: First pages are mandatory (for Word and Excel) and must be properly completed
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: bookmarks - document having more than 50 pages should have bookmarks in the pdf.
+OUTPUT: {'type': 'searchable', 'field': 'bookmarks', 'operator': '>=', 'value': 50, 'excel_column': ''}
+--------------------------------------------------
+RULE: logo - project logo must be the present on the header.
+OUTPUT: {'type': 'logo', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: language - english, if the language of origin is not english, then the translation must be applied
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '=', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: Vendor Name - Should be in line with Column B of the EXCEL.
+OUTPUT: {'type': 'filename', 'field': '', 'operator': '', 'value': '', 'excel_column': 'B'}
+--------------------------------------------------
+RULE: PO Nr - Should be in line with Column A of the EXCEL.
+OUTPUT: {'type': 'vmdl', 'field': 'PO Nr', 'operator': '', 'value': '', 'excel_column': 'A'}
+--------------------------------------------------
+RULE: PO Title - Should be in line with Column C of the EXCEL.
+OUTPUT: {'type': 'PO Title', 'field': '', 'operator': '', 'value': '', 'excel_column': 'Column C'}
+--------------------------------------------------
+RULE: Document Title - Should be in line with Column E of the EXCEL.
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '', 'value': '', 'excel_column': 'E'}
+--------------------------------------------------
+RULE: Class - Should be in line with Column of the EXCEL (where header = “Kaminho Doc Class”)
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: Discipline - Should be in line with Column J of the EXCEL (where header = “Discipline”)
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: Contractor Doc Num - If available, Should be in line with Column L of the EXCEL Where header = “Contractor (CTR) Document Nr”
+OUTPUT: {'type': 'file_size', 'field': 'Contractor Doc Num', 'operator': '', 'value': '', 'excel_column': 'L'}
+--------------------------------------------------
+RULE: System/Subsystem - Should be in line with Column “System / Subsystem” of the EXCEL
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: Document Type - Should be in line with Column I of the EXCEL (where header = “Doc. Type”)
+OUTPUT: {'type': 'file_size | filename', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: Status - Should be consistent with calculation summarized in the chart below where: Class is the current class on the Header of the PDF document, “Previous rev was” can be found in the Excel “VMDL” “Previous review code” can be found in the Excel “VMDL”. These 3 criteria will allow to read the next expected status that should be read in the Header of current PDF to be scanned. For example: if the scanned document has the class 2/3, if the previous rev was “IFR” If the previous CTR review code was “3 - Rejected”, then the expected status on current doc should be “IFR”
+OUTPUT: {'type': 'vmdl', 'field': 'Status', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: First status - If the revision in the document is 00, status should correspond the look-up based on the class: In VMDL file (excel file) 00 is replaced by “xx”
+OUTPUT: {'type': 'vmdl', 'field': 'revision', 'operator': '', 'value': 'xx', 'excel_column': ''}
+--------------------------------------------------
+RULE: Vendor Name - Should be in line with Column B of the EXCEL.
+OUTPUT: {'type': 'filename', 'field': '', 'operator': '', 'value': '', 'excel_column': 'B'}
+--------------------------------------------------
+RULE: PO Nr - Should be in line with Column A of the EXCEL.
+OUTPUT: {'type': 'vmdl', 'field': 'PO Nr', 'operator': '', 'value': '', 'excel_column': 'A'}
+--------------------------------------------------
+RULE: PO Title - Should be in line with Column C of the EXCEL.
+OUTPUT: {'type': 'PO Title', 'field': '', 'operator': '', 'value': '', 'excel_column': 'Column C'}
+--------------------------------------------------
+RULE: Document Title - Should be in line with Column E of the EXCEL.
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '', 'value': '', 'excel_column': 'E'}
+--------------------------------------------------
+RULE: Class - Should be in line with Column of the EXCEL (where header = “Kaminho Doc Class”)
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: Discipline - Should be in line with Column J of the EXCEL (where header = “Discipline”)
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: Contractor Doc Num - If available, Should be in line with Column L of the EXCEL Where header = “Contractor (CTR) Document Nr”
+OUTPUT: {'type': 'file_size', 'field': 'Contractor Doc Num', 'operator': '', 'value': '', 'excel_column': 'L'}
+--------------------------------------------------
+RULE: System/Subsystem - Should be in line with Column “System / Subsystem” of the EXCEL
+OUTPUT: {'type': 'file_size', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: Document Type - Should be in line with Column I of the EXCEL (where header = “Doc. Type”)
+OUTPUT: {'type': 'file_size | filename', 'field': '', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: Status - Should be consistent with calculation summarized in the chart below where: Class is the current class on the Header of the PDF document, “Previous rev was” can be found in the Excel “VMDL” “Previous review code” can be found in the Excel “VMDL”. These 3 criteria will allow to read the next expected status that should be read in the Header of current PDF to be scanned. For example: if the scanned document has the class 2/3, if the previous rev was “IFR” If the previous CTR review code was “3 - Rejected”, then the expected status on current doc should be “IFR”
+OUTPUT: {'type': 'vmdl', 'field': 'Status', 'operator': '', 'value': '', 'excel_column': ''}
+--------------------------------------------------
+RULE: First status - If the revision in the document is 00, status should correspond the look-up based on the class: In VMDL file (excel file) 00 is replaced by “xx”
+OUTPUT: {'type': 'vmdl', 'field': 'revision', 'operator': '', 'value': 'xx', 'excel_column': ''}
+--------------------------------------------------

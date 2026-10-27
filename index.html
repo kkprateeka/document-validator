@@ -1,0 +1,469 @@
+<html>
+<head>
+    <title>Document Validation Tool</title>
+<style>
+    * {
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+    margin: 0;
+    height: 100vh;
+    position: relative;
+    background: url("background.png") no-repeat center center/cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    /* 🔥 Light grey overlay */
+    background: rgba(230, 240, 255, 0.6);
+
+    z-index: 0;
+}
+.header,
+.card,
+.result-container {
+    position: relative;
+    z-index: 1;
+}
+/* Title (NOT full width anymore) */
+.header {
+    margin-top: 30px;
+    padding: 12px 25px;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(90deg, #ff7e5f, #feb47b);
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+    /* Center Card */
+    .card {
+        margin-top: 40px;
+        background: rgba(255, 255, 255, 0.95);
+        padding: 30px;
+        border-radius: 15px;
+        width: 420px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        text-align: center;
+    }
+
+    .card h3 {
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    /* Inputs */
+    .file-input {
+        margin: 15px 0;
+        text-align: left;
+    }
+
+    label {
+        font-size: 14px;
+        color: #555;
+    }
+
+    input[type="file"] {
+        width: 100%;
+        margin-top: 5px;
+        padding: 8px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+    }
+
+    /* Button */
+    button {
+        width: 100%;
+        padding: 12px;
+        margin-top: 20px;
+        border: none;
+        border-radius: 25px;
+        background: linear-gradient(90deg, #36d1dc, #5b86e5);
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    /* Loading */
+    #loading {
+        display: none;
+        margin-top: 10px;
+        color: #555;
+    }
+
+    /* Result Table */
+    .result-container {
+        width: 90%;
+        margin-top: 30px;
+        background: white;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th {
+        background: #667eea;
+        color: white;
+        padding: 10px;
+    }
+
+    td {
+        padding: 8px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .PASS { color: green; font-weight: bold; }
+    .NOTCOMPLIANT { color: red; font-weight: bold; }
+    .DOUBT { color: orange; font-weight: bold; }
+
+    /* Overlay */
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 1000;
+    color: white;
+    font-size: 18px;
+}
+
+/* Spinner */
+.spinner {
+    border: 6px solid #f3f3f3;
+    border-top: 6px solid #36d1dc;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 15px;
+}
+#progressContainer {
+    width: 100%;
+    height: 8px;
+    background: #eee;
+    border-radius: 10px;
+    margin-top: 15px;
+    overflow: hidden;
+}
+
+#progressBar {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #36d1dc, #5b86e5);
+    transition: width 0.3s ease;
+}
+
+/* Animation */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+tr {
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeIn 0.5s forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.result-container {
+    background: rgba(255, 255, 255, 0.95);
+}
+table {
+    border-radius: 10px;
+    overflow: hidden;
+}
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+    📄 Intelligent Document Validation Tool
+</div>
+
+<div class="card">
+    <h3 id="title">Login</h3>
+
+    <!-- LOGIN -->
+    <div id="loginSection">
+        <div class="file-input">
+            <label>Employee ID</label>
+            <input type="text" id="empId" placeholder="Enter ID">
+        </div>
+        <button onclick="login()">Login</button>
+    </div>
+
+    <!-- UPLOAD FORM (HIDDEN INITIALLY) -->
+    <div id="uploadSection" style="display:none;">
+    
+    <!-- ADMIN MENU -->
+    <div id="adminMenu" style="display:none;">
+        <button onclick="showValidate()">📄 Validate Document</button>
+        <button onclick="showSetWord()">⚙️ Set Word Rules</button>
+    </div>
+
+    <!-- TITLE -->
+    <h3 id="uploadTitle">Upload Documents</h3>
+<!-- VALIDATION SECTION -->
+<div id="validateSection">
+    <form id="uploadForm">
+    <input type="hidden" name="emp_id" id="hiddenEmpId">
+    <div class="file-input" id="wordInput">
+        <label>Word File</label>
+        <input type="file" name="word">
+    </div>
+
+    <div class="file-input">
+        <label>PDF File</label>
+        <input type="file" name="pdf" required>
+    </div>
+
+    <div class="file-input">
+        <label>Excel File</label>
+        <input type="file" name="excel" required>
+    </div>
+
+    <button type="submit">🚀 Validate Documents</button>
+    <div id="progressContainer" style="display:none;">
+        <div id="progressBar"></div>
+    </div>
+</form>
+</div> <!-- validateSection -->
+
+<!-- SET WORD SECTION -->
+<div id="setWordSection" style="display:none;">
+    <h3>Set Default Word File</h3>
+    
+    <input type="file" id="defaultWordFile">
+    <button onclick="uploadDefaultWord()">Save as Default</button>
+</div>
+</div> <!-- uploadSection end -->
+
+<p id="loading">⏳ Processing... please wait</p>
+
+</div>
+
+<div id="result" class="result-container" style="display:none;"></div>
+
+<script>
+    let currentRole = null;
+
+async function login() {
+    let empId = document.getElementById("empId").value;
+
+    if (!empId) {
+        alert("Enter Employee ID");
+        return;
+    }
+
+    let response = await fetch("http://localhost:8000/login", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ emp_id: empId })
+    });
+
+    let data = await response.json();
+
+    if (data.error) {
+        alert(data.error);
+        return;
+    }
+
+    currentRole = data.role;
+
+    // Store emp_id for later
+    document.getElementById("hiddenEmpId").value = empId;
+
+    // Switch UI
+    document.getElementById("loginSection").style.display = "none";
+    document.getElementById("uploadSection").style.display = "block";
+    if (currentRole === "admin") {
+        document.getElementById("adminMenu").style.display = "block";
+    } else {
+        document.getElementById("wordInput").style.display = "none";
+    }
+
+    document.getElementById("title").innerText = "Upload Documents (" + currentRole + ")";
+
+    // 🔥 Role-based UI
+    if (currentRole === "employee") {
+        document.getElementById("wordInput").style.display = "none";
+    }
+}
+document.getElementById("uploadForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    let formData = new FormData(this);
+
+    // ✅ ADD HERE
+    if (currentRole === "admin") {
+        let wordFile = document.querySelector("input[name='word']").files.length;
+        if (!wordFile) {
+            alert("Admin must upload Word file");
+            return;
+        }
+    }
+    // Show overlay
+    document.getElementById("overlay").style.display = "flex";
+    document.body.style.overflow = "hidden";
+
+    // Progress bar
+    let progressContainer = document.getElementById("progressContainer");
+    let progressBar = document.getElementById("progressBar");
+    progressContainer.style.display = "block";
+    progressBar.style.width = "10%";
+
+    // Disable button
+    let btn = this.querySelector("button");
+    btn.disabled = true;
+    btn.innerText = "Processing...";
+
+    try {
+        // Fake progress (since fetch doesn't give upload progress easily)
+        let interval = setInterval(() => {
+            let current = parseInt(progressBar.style.width) || 0;
+            if (current < 90) {
+                progressBar.style.width = (current + 10) + "%";
+            }
+        }, 300);
+
+        let response = await fetch("http://localhost:8000/process", {
+            method: "POST",
+            body: formData
+        });
+
+        clearInterval(interval);
+        progressBar.style.width = "100%";
+
+        let data = await response.json();
+        if (data.error) {
+            alert(data.error);
+            return;
+        }
+
+        let html = "<h3>Validation Results</h3>";
+        html += "<table>";
+        html += "<tr><th>Criteria</th><th>Description</th><th>Result</th><th>Evidence</th><th>Confidence</th></tr>";
+
+        data.results.forEach((r, index) => {
+            let cls = r.result.replace(/\s/g, "");
+
+            html += `<tr style="animation-delay:${index * 0.1}s">
+                <td>${r.criteria_no}</td>
+                <td>${r.description}</td>
+                <td class="${cls}">${r.result}</td>
+                <td>${r.evidence}</td>
+                <td>${r.confidence}</td>
+            </tr>`;
+        });
+
+        html += "</table>";
+
+        let resultDiv = document.getElementById("result");
+        resultDiv.style.display = "block";
+        resultDiv.innerHTML = html;
+
+    } catch (err) {
+        alert("Error processing files");
+        console.error(err);
+    }
+
+    // Hide overlay
+    document.getElementById("overlay").style.display = "none";
+    document.body.style.overflow = "auto";
+
+    // Reset button
+    btn.disabled = false;
+    btn.innerText = "🚀 Validate Documents";
+    progressBar.style.width = "0%";
+    progressContainer.style.display = "none";
+});
+function showValidate() {
+    document.getElementById("validateSection").style.display = "block";
+    document.getElementById("setWordSection").style.display = "none";
+    document.getElementById("uploadTitle").innerText = "Validate Documents";
+}
+
+function showSetWord() {
+    document.getElementById("validateSection").style.display = "none";
+    document.getElementById("setWordSection").style.display = "block";
+    document.getElementById("uploadTitle").innerText = "Set Word Rules";
+}
+async function uploadDefaultWord() {
+    let fileInput = document.getElementById("defaultWordFile");
+
+    if (fileInput.files.length === 0) {
+        alert("Select a Word file");
+        return;
+    }
+
+    let formData = new FormData();
+    formData.append("emp_id", document.getElementById("hiddenEmpId").value);
+    formData.append("word", fileInput.files[0]);
+
+    let response = await fetch("http://localhost:8000/admin/set-word", {
+        method: "POST",
+        body: formData
+    });
+
+    let data = await response.json();
+    if (data.error) {
+    alert(data.error);
+    return;
+}
+
+    if (data.message) {
+        alert("✅ Default Word updated successfully");
+    } else {
+        alert("❌ " + data.error);
+    }
+}
+</script>
+<div id="overlay">
+    <div class="spinner"></div>
+    <p>Processing your documents...</p>
+</div>
+
+</body>
+</html>
